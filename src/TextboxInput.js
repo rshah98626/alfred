@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { TextInput, StyleSheet} from 'react-native';
+import React, { useState } from 'react'
+import { TextInput, StyleSheet } from 'react-native'
 
 const TextboxInput = ({ placeholder, isSecure, onChangeCallback }) => {
   const [text, setText] = useState('')
@@ -10,7 +10,7 @@ const TextboxInput = ({ placeholder, isSecure, onChangeCallback }) => {
 
   return (
     <TextInput
-      autoCapitalize='none'
+      autoCapitalize="none"
       style={styles.textBox}
       placeholder={placeholder}
       onChangeText={onChange}
@@ -18,7 +18,7 @@ const TextboxInput = ({ placeholder, isSecure, onChangeCallback }) => {
       secureTextEntry={isSecure}
     />
   )
-};
+}
 
 const styles = StyleSheet.create({
   textBox: {
@@ -28,10 +28,10 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     height: 40,
     paddingHorizontal: 10,
-    textAlign: "center",
+    textAlign: 'center',
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
   },
-});
+})
 
-export default TextboxInput;
+export default TextboxInput

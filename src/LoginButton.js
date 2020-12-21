@@ -1,15 +1,19 @@
-import React from "react";
-import { Button } from "react-native";
+import React from 'react'
+import { ActivityIndicator, Button } from 'react-native'
 
-const LoginButton = ({ onPressCallback }) => {
-  return (
-    <Button
-      onPress={onPressCallback}
-      title="Login Button"
-      color="#FFF"
-      accessibilityLabel="Login to the app"
-    />
-  )
-};
+const BasicButton = ({ onPressCallback, title, isLoading }) => {
+  if (isLoading) {
+    return <ActivityIndicator color="#FFF" size="large" />
+  } else {
+    return (
+      <Button
+        onPress={onPressCallback}
+        title={title}
+        color="#FFF"
+        accessibilityLabel={title}
+      />
+    )
+  }
+}
 
-export default LoginButton;
+export default BasicButton
