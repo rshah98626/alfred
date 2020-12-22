@@ -4,15 +4,17 @@ import { StyleSheet, View } from 'react-native'
 import BasicButton from './LoginButton'
 import TextboxInput from './TextboxInput'
 import { actionCreators } from './actions'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
-const LoginView = (props) => {
+const LoginView = () => {
   const [usernameText, setUsernameText] = useState('')
   const [passwordText, setPasswordText] = useState('')
+  const dispatch = useDispatch()
   const loginButtonCallback = () => {
     console.log('Login button pressed')
-    props.loginAction(usernameText, passwordText)
+    dispatch(actionCreators.loginAction(usernameText, passwordText))
   }
+  const stillLoading = useSelector(state => state.login.stillLoading)
 
   return (
     <View style={styles.container}>
@@ -29,7 +31,7 @@ const LoginView = (props) => {
       <BasicButton
         onPressCallback={loginButtonCallback}
         title="Login Button"
-        isLoading={props.login.isLoading}
+        isLoading={stillLoading}
       />
       <StatusBar style="auto" />
     </View>
@@ -45,10 +47,4 @@ const styles = StyleSheet.create({
   },
 })
 
-const actions = {
-  loginAction: actionCreators.loginAction,
-}
-
-const mapStateToProps = ({ login }) => ({ login })
-
-export default connect(mapStateToProps, actions)(LoginView)
+export default LoginView
