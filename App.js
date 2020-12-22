@@ -10,7 +10,7 @@ const App = () => {
   const errorMessage = useSelector(state => state.login.errorMessage)
   
   if (stillLoading) {
-    console.log("LOADING")
+    console.log("LOADIN")
   }
   if (isAuthenticated) {
     console.log("WE GOT THE RIGHT STATE")
