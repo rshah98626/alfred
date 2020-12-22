@@ -4,6 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import { createLogger } from 'redux-logger'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
+// for logging redux state
 const loggerMiddleware = createLogger()
 
 export const store = createStore(
