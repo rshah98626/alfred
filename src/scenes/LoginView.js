@@ -1,10 +1,10 @@
 import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
-import BasicButton from './LoginButton'
-import TextboxInput from './TextboxInput'
-import { actionCreators } from './actions'
 import { useDispatch, useSelector } from 'react-redux'
+import BasicButton from '../commonComponents/LoginButton'
+import TextboxInput from '../commonComponents/TextboxInput'
+import { actionCreators } from '../state/actions'
 
 const LoginView = () => {
   const [usernameText, setUsernameText] = useState('')

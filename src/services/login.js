@@ -1,9 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-export const UserServices = {
-  login,
-}
-
 const LOGIN_KEY = 'LOGIN_KEY'
 const baseURL = 'http://localhost:8000'
 
@@ -28,3 +24,5 @@ function login(username, password) {
       AsyncStorage.setItem(LOGIN_KEY, json.key)
     })
 }
+
+export default login

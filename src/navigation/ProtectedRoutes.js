@@ -1,7 +1,7 @@
 import React from 'react'
-import HomeView from './HomeView'
-import SettingsView from './SettingsView'
-import FundsList from './FundList'
+import HomeView from '../scenes/HomeView'
+import SettingsView from '../scenes/SettingsView'
+import FundsListView from '../scenes/FundsListView'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 
 const Tab = createBottomTabNavigator()
@@ -12,7 +12,7 @@ const ProtectedRoutes = () => {
       <Tab.Screen name="Home" component={HomeView} />
       <Tab.Screen
         name="Fund List"
-        component={FundsList}
+        component={FundsListView}
         options={{ tabBarLabel: 'Funds' }}
       />
       <Tab.Screen name="Settings" component={SettingsView} />

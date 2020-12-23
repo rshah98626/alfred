@@ -1,5 +1,5 @@
 import { LOADING, LOGIN_FAILURE, LOGIN_SUCCESS } from './types'
-import { UserServices } from './UserServices'
+import { UserServices } from '../services/userServices'
 
 // Write a synchronous outer function that receives the `text` parameter:
 function loginAction(username, password) {

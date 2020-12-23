@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import { Provider, useSelector } from 'react-redux'
-import { store } from './src/store'
+import { store } from './src/state/store'
 import { NavigationContainer } from '@react-navigation/native'
-import ProtectedRoutes from './src/ProtectedRoutes'
-import UnprotectedRoutes from './src/UnprotectedRoutes'
+import ProtectedRoutes from './src/navigation/ProtectedRoutes'
+import UnprotectedRoutes from './src/navigation/UnprotectedRoutes'
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.login.isAuthenticated)

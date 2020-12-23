@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-const FundsList = () => {
+const FundsListView = () => {
   return (
     <View style={styles.container}>
       <Text>Fund List Screen</Text>
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default FundsList
+export default FundsListView
