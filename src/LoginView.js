@@ -14,7 +14,7 @@ const LoginView = () => {
     console.log('Login button pressed')
     dispatch(actionCreators.loginAction(usernameText, passwordText))
   }
-  const stillLoading = useSelector(state => state.login.stillLoading)
+  const stillLoading = useSelector((state) => state.login.stillLoading)
 
   return (
     <View style={styles.container}>
@@ -30,7 +30,7 @@ const LoginView = () => {
       />
       <BasicButton
         onPressCallback={loginButtonCallback}
-        title="Login Button"
+        title="Login"
         isLoading={stillLoading}
       />
       <StatusBar style="auto" />

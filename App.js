@@ -1,14 +1,9 @@
 import React, { useEffect } from 'react'
 import { Provider, useSelector } from 'react-redux'
-import LoginView from './src/LoginView'
 import { store } from './src/store'
 import { NavigationContainer } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
-import SplashScreen from './src/SplashScreen'
-
-const Stack = createStackNavigator()
-const Tab = createBottomTabNavigator()
+import ProtectedRoutes from './src/ProtectedRoutes'
+import UnprotectedRoutes from './src/UnprotectedRoutes'
 
 const App = () => {
   const isAuthenticated = useSelector((state) => state.login.isAuthenticated)
@@ -18,16 +13,13 @@ const App = () => {
   if (stillLoading) {
     console.log('LOADING')
   }
-  if (isAuthenticated) {
-    console.log('WE GOT THE RIGHT STATE')
-  }
   if (errorMessage) {
     console.log(errorMessage)
     console.log('FAILED LOGIN')
   }
   return (
     <NavigationContainer>
-      <LoginView />
+      {isAuthenticated ? <ProtectedRoutes /> : <UnprotectedRoutes />}
     </NavigationContainer>
   )
 }
