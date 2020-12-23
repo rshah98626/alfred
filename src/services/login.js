@@ -1,10 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage'
 
-const LOGIN_KEY = 'LOGIN_KEY'
-const baseURL = 'http://localhost:8000'
-
 function login(username, password) {
-  return fetch(baseURL + '/api/v1/auth/login/', {
+  return fetch(process.env.BASE_URL + '/api/v1/auth/login/', {
     method: 'POST',
     headers: {
       Accept: 'application/json',
@@ -21,7 +18,12 @@ function login(username, password) {
         throw new Error(json[Object.keys(json)[0]][0])
       }
       console.log('Trying to store auth token: ' + json.key)
-      AsyncStorage.setItem(LOGIN_KEY, json.key)
+      try {
+        AsyncStorage.setItem(String(process.env.AUTH_TOKEN), json.key)
+      } catch (err) {
+        console.error('Async Storage failed')
+        throw new Error('Cannot log in currently')
+      }
     })
 }
 
