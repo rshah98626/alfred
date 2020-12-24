@@ -1,4 +1,4 @@
-import GetFeedTypes from '../types/GetFeedTypes'
+import { GetFeedTypes } from '../types/GetFeedTypes'
 import { DataServices } from '../../services'
 
 function getFeedAction() {

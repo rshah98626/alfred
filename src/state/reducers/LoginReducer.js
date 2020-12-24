@@ -1,6 +1,5 @@
 import { LoginTypes } from '../types/LoginTypes'
 
-// initial state
 const initialState = {
   isAuthenticated: false,
   stillLoading: false,
