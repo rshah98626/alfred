@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux'
-import { LOGIN_SUCCESS, LOGIN_FAILURE, LOADING } from './types'
+import { LoginTypes } from '../types/LoginTypes'
 
 // initial state
 const initialState = {
@@ -7,26 +6,22 @@ const initialState = {
   stillLoading: false,
 }
 
-function login(state = initialState, action) {
+function loginReducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_SUCCESS:
+    case LoginTypes.LOGIN_SUCCESS:
       return { isAuthenticated: true, stillLoading: false }
-    case LOGIN_FAILURE:
+    case LoginTypes.LOGIN_FAILURE:
       return {
         ...state,
         isAuthenticated: false,
         stillLoading: false,
         errorMessage: action.message,
       }
-    case LOADING:
+    case LoginTypes.LOGIN_LOADING:
       return { ...state, stillLoading: true, isAuthenticated: false }
     default:
       return state
   }
 }
 
-const rootReducer = combineReducers({
-  login: login,
-})
-
-export default rootReducer
+export default loginReducer
