@@ -3,14 +3,14 @@ import { GetFeedTypes } from '../types/GetFeedTypes'
 const initialState = {
   feedLoading: false,
   feedRetrievalFailed: false,
-  posts: null,
+  response: [],
 }
 
 const getFeedReducer = (state = initialState, action) => {
   switch (action.type) {
     case GetFeedTypes.GET_FEED_SUCCESS:
       return {
-        posts: action.posts,
+        response: action.posts,
         feedLoading: false,
         feedRetrievalFailed: false,
       }
