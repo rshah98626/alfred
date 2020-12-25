@@ -1,21 +1,8 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import FeedListView from '../commonComponents/FeedListView'
 
 const HomeView = () => {
-  return (
-    <View style={styles.container}>
-      <Text>Home Screen</Text>
-    </View>
-  )
+  return <FeedListView />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})
 
 export default HomeView
