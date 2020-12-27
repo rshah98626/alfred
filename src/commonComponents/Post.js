@@ -1,15 +1,20 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { Text, StyleSheet, Pressable } from 'react-native'
 
-const Post = ({ postData }) => {
+const Post = ({ postData, navigation }) => {
   const dateString = new Date(postData.created_at).toLocaleString()
+  const onPressHandler = () => {
+    if (postData.articles.length > 0) {
+      navigation.navigate('Article', { postId: postData.id })
+    }
+  }
 
   return (
-    <View style={styles.item}>
+    <Pressable style={styles.item} onPress={onPressHandler}>
       <Text>{dateString}</Text>
       <Text style={styles.title}>{postData.fund.name}</Text>
       <Text>{postData.message}</Text>
-    </View>
+    </Pressable>
   )
 }
 

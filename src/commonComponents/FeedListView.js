@@ -1,10 +1,16 @@
 import React, { useEffect } from 'react'
-import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
+import {
+  SafeAreaView,
+  StyleSheet,
+  FlatList,
+  StatusBar,
+  Button,
+} from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionCreators } from '../state/actions'
 import Post from '../commonComponents/Post'
 
-const FeedListView = () => {
+const FeedListView = ({ navigation }) => {
   const dispatch = useDispatch()
   useEffect(() => {
     async function fetchData() {
@@ -20,7 +26,9 @@ const FeedListView = () => {
     <SafeAreaView style={styles.container}>
       <FlatList
         data={feedData}
-        renderItem={({ item }) => <Post postData={item} />}
+        renderItem={({ item }) => (
+          <Post postData={item} navigation={navigation} />
+        )}
         keyExtractor={(item) => String(item.id)}
       />
     </SafeAreaView>
