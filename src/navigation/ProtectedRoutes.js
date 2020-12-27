@@ -1,22 +1,28 @@
 import React from 'react'
-import HomeView from '../scenes/HomeView'
+import { createStackNavigator } from '@react-navigation/stack'
 import SettingsView from '../scenes/SettingsView'
 import FundsListView from '../scenes/FundsListView'
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import FeedListView from '../commonComponents/FeedListView'
+import ArticleDetailView from '../scenes/ArticleDetailView'
+import { CardStyleInterpolators } from '@react-navigation/stack'
 
-const Tab = createBottomTabNavigator()
+const Stack = createStackNavigator()
 
 const ProtectedRoutes = () => {
   return (
-    <Tab.Navigator>
-      <Tab.Screen name="Home" component={HomeView} />
-      <Tab.Screen
-        name="Fund List"
-        component={FundsListView}
-        options={{ tabBarLabel: 'Funds' }}
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="Feed" component={FeedListView} />
+      <Stack.Screen
+        name="Article"
+        component={ArticleDetailView}
+        options={{
+          gestureDirection: 'vertical',
+          cardStyleInterpolator: CardStyleInterpolators.forModalPresentationIOS,
+        }}
       />
-      <Tab.Screen name="Settings" component={SettingsView} />
-    </Tab.Navigator>
+      <Stack.Screen name="Fund Search" component={FundsListView} />
+      <Stack.Screen name="Settings" component={SettingsView} />
+    </Stack.Navigator>
   )
 }
 
