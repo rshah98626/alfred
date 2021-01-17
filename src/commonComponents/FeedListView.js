@@ -1,11 +1,5 @@
 import React, { useEffect } from 'react'
-import {
-  SafeAreaView,
-  StyleSheet,
-  FlatList,
-  StatusBar,
-  Button,
-} from 'react-native'
+import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { actionCreators } from '../state/actions'
 import Post from '../commonComponents/Post'

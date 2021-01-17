@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "prettier": "prettier --write src/**/*.js"
+    "prettier": "prettier --write src/**"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.13.2",
