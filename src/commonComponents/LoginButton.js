@@ -9,7 +9,7 @@ const BasicButton = ({ onPressCallback, title, isLoading }) => {
       <Button
         onPress={onPressCallback}
         title={title}
-        color="#FFF"
+        color="#000"
         accessibilityLabel={title}
       />
     )

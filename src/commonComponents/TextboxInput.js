@@ -13,6 +13,7 @@ const TextboxInput = ({ placeholder, isSecure, onChangeCallback }) => {
       autoCapitalize="none"
       style={styles.textBox}
       placeholder={placeholder}
+      placeholderTextColor="white"
       onChangeText={onChange}
       defaultValue={text}
       secureTextEntry={isSecure}
@@ -22,8 +23,8 @@ const TextboxInput = ({ placeholder, isSecure, onChangeCallback }) => {
 
 const styles = StyleSheet.create({
   textBox: {
-    color: 'blue',
-    backgroundColor: 'orange',
+    color: 'white',
+    backgroundColor: '#5765ff',
     width: '50%',
     borderRadius: 50,
     height: 40,

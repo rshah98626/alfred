@@ -11,22 +11,26 @@ const Post = ({ postData, navigation }) => {
 
   return (
     <Pressable style={styles.item} onPress={onPressHandler}>
-      <Text>{dateString}</Text>
+      <Text style={styles.supportingText}>{dateString}</Text>
       <Text style={styles.title}>{postData.fund.name}</Text>
-      <Text>{postData.message}</Text>
+      <Text style={styles.supportingText}>{postData.message}</Text>
     </Pressable>
   )
 }
 
 const styles = StyleSheet.create({
   item: {
-    backgroundColor: '#f9c2ff',
+    backgroundColor: '#5765ff',
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16,
   },
   title: {
     fontSize: 32,
+    color: 'white',
+  },
+  supportingText: {
+    color: 'white',
   },
 })
 

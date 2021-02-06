@@ -23,7 +23,10 @@ const StartAppSplash = ({ onAnimationFinished }) => {
             opacity: fadeAnim,
           },
         ]}>
-        <Image source={require('../../assets/startSplash.png')} />
+        <Image
+          source={require('../../assets/startSplash.png')}
+          style={styles.image}
+        />
       </Animated.View>
     </View>
   )
@@ -32,13 +35,19 @@ const StartAppSplash = ({ onAnimationFinished }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#FFF',
     alignItems: 'center',
     justifyContent: 'center',
   },
   fadingContainer: {
     paddingVertical: 8,
     paddingHorizontal: 16,
+  },
+  image: {
+    flex: 1,
+    width: 300,
+    height: 300,
+    resizeMode: 'contain',
   },
 })
 
