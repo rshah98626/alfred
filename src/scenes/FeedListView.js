@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
-import Post from '../commonComponents/Post'
 import { DataServices } from '../services'
+import Feed from '../commonComponents/Feed'
 
 const FeedListView = ({ navigation }) => {
   const [state, setState] = useState({
@@ -36,25 +35,7 @@ const FeedListView = ({ navigation }) => {
     return () => (isSubscribed = false)
   }, [])
 
-  return (
-    <SafeAreaView style={styles.container}>
-      <FlatList
-        data={state.feedData}
-        renderItem={({ item }) => (
-          <Post postData={item} navigation={navigation} />
-        )}
-        keyExtractor={(item) => String(item.id)}
-      />
-    </SafeAreaView>
-  )
+  return <Feed feedData={state.feedData} navigation={navigation} />
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    marginTop: StatusBar.currentHeight || 0,
-    backgroundColor: '#FFF',
-  },
-})
 
 export default FeedListView

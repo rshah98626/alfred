@@ -1,3 +1,4 @@
+import React from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
 import Post from '../commonComponents/Post'
 
