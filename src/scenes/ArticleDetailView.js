@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, Button, Alert } from 'react-native'
 
 const ArticleDetailView = ({ route, navigation }) => {
   const { currentPost } = route.params
 
   // Show pop up if incorrect post found
-  React.useEffect(() => {
+  useEffect(() => {
     if (!currentPost) {
       console.error('Post unable to be found on detailed page')
       Alert.alert(
