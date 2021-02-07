@@ -1,8 +1,8 @@
-import React from 'react'
-import loginReducer from './reducers/LoginReducer'
-import { LoginTypes } from './types/LoginTypes'
+import React, { createContext, useReducer } from 'react'
+import loginReducer from '../reducers/LoginReducer'
+import { LoginTypes } from '../types/LoginTypes'
 
-const UserContext = React.createContext()
+const UserContext = createContext()
 
 const initialState = {
   isAuthenticated: false,
@@ -11,7 +11,7 @@ const initialState = {
 }
 
 const UserProvider = ({ children }) => {
-  const [state, dispatch] = React.useReducer(loginReducer, initialState)
+  const [state, dispatch] = useReducer(loginReducer, initialState)
 
   const contextValues = {
     isAuthenticated: state.isAuthenticated,

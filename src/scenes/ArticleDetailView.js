@@ -1,17 +1,11 @@
-import { NavigationContainer } from '@react-navigation/native'
 import React from 'react'
 import { View, Text, StyleSheet, Button, Alert } from 'react-native'
-import { useSelector } from 'react-redux'
-import { useEffect } from 'react/cjs/react.development'
 
 const ArticleDetailView = ({ route, navigation }) => {
-  const { postId } = route.params
-  const currentPost = useSelector((state) =>
-    state.getFeed.response.posts.find((it) => it.id === postId)
-  )
+  const { currentPost } = route.params
 
   // Show pop up if incorrect post found
-  useEffect(() => {
+  React.useEffect(() => {
     if (!currentPost) {
       console.error('Post unable to be found on detailed page')
       Alert.alert(
@@ -22,7 +16,7 @@ const ArticleDetailView = ({ route, navigation }) => {
       )
     }
     return
-  }, [currentPost, postId])
+  }, [currentPost])
 
   return (
     <View style={styles.container}>

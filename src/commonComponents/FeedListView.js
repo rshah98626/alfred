@@ -1,25 +1,45 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { SafeAreaView, StyleSheet, FlatList, StatusBar } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
-import { actionCreators } from '../state/actions'
 import Post from '../commonComponents/Post'
+import { DataServices } from '../services'
 
 const FeedListView = ({ navigation }) => {
-  const dispatch = useDispatch()
-  useEffect(() => {
-    async function fetchData() {
-      dispatch(actionCreators.getFeedAction())
-    }
-    fetchData()
-    return
-  }, [])
+  const [state, setState] = useState({
+    feedData: null,
+    isFeedLoading: true,
+    errorMessage: null,
+  })
 
-  const feedData = useSelector((state) => state.getFeed.response.posts)
+  useEffect(() => {
+    let isSubscribed = true
+
+    DataServices.getFeed()
+      .then((data) =>
+        isSubscribed
+          ? setState({
+              feedData: data.posts,
+              isFeedLoading: false,
+              errorMessage: null,
+            })
+          : null
+      )
+      .catch((err) =>
+        isSubscribed
+          ? setState((prevState) => ({
+              ...prevState,
+              isFeedLoading: false,
+              errorMessage: err.message,
+            }))
+          : null
+      )
+
+    return () => (isSubscribed = false)
+  }, [])
 
   return (
     <SafeAreaView style={styles.container}>
       <FlatList
-        data={feedData}
+        data={state.feedData}
         renderItem={({ item }) => (
           <Post postData={item} navigation={navigation} />
         )}

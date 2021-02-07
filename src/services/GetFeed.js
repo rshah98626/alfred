@@ -1,7 +1,7 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
+import retrieveAuthToken from './RetrieveAuthToken'
 
 async function getFeed() {
-  return getAuthToken().then(async (authToken) => {
+  return retrieveAuthToken().then(async (authToken) => {
     return fetch(process.env.BASE_URL + '/api/v1/feed/', {
       method: 'GET',
       headers: {
@@ -11,18 +11,6 @@ async function getFeed() {
       },
     }).then((resp) => resp.json())
   })
-}
-
-const getAuthToken = async () => {
-  try {
-    const jsonValue = await AsyncStorage.getItem(process.env.AUTH_TOKEN)
-    if (!jsonValue)
-      throw new Error('Retrievung auth token from async storage returned null')
-    return jsonValue
-  } catch (e) {
-    console.error(e.message)
-    throw new Error('Could not get auth token from async storage')
-  }
 }
 
 export default getFeed

@@ -1,26 +1,21 @@
 import { StatusBar } from 'expo-status-bar'
-import React, { useState } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { StyleSheet, View } from 'react-native'
-import { useDispatch, useSelector } from 'react-redux'
 import BasicButton from '../commonComponents/BasicButton'
 import TextboxInput from '../commonComponents/TextboxInput'
 import { UserServices } from '../services'
-import { actionCreators } from '../state/actions'
-import { UserContext } from '../state/UserContext'
+import { UserContext } from '../state/contexts/UserContext'
 
 const LoginView = () => {
-  const {
-    loginSuccess,
-    loginLoading,
-    loginFailure,
-    stillLoading,
-  } = React.useContext(UserContext)
+  const { loginSuccess, loginLoading, loginFailure, stillLoading } = useContext(
+    UserContext
+  )
 
   const [usernameText, setUsernameText] = useState('')
   const [passwordText, setPasswordText] = useState('')
   const [isButtonPressed, setIsButtonPressed] = useState(false)
 
-  React.useEffect(() => {
+  useEffect(() => {
     let isSubscribed = true
 
     if (isButtonPressed) {

@@ -1,11 +1,9 @@
 import React, { useState } from 'react'
-import { Provider, useSelector } from 'react-redux'
-import { store } from './src/state/store'
 import { NavigationContainer } from '@react-navigation/native'
 import ProtectedRoutes from './src/navigation/ProtectedRoutes'
 import UnprotectedRoutes from './src/navigation/UnprotectedRoutes'
 import StartAppSplash from './src/scenes/StartAppSplash'
-import { UserContext, UserProvider } from './src/state/UserContext'
+import { UserContext, UserProvider } from './src/state/contexts/UserContext'
 
 const App = ({ isInit }) => {
   const { isAuthenticated, stillLoading, errorMessage } = React.useContext(
@@ -35,13 +33,11 @@ const App = ({ isInit }) => {
 }
 
 const Root = () => {
-  const [isInit, setIsInit] = useState(true)
+  const [isInit] = useState(true)
   return (
-    // <Provider store={store}>
     <UserProvider>
       <App isInit={isInit} />
     </UserProvider>
-    // </Provider>
   )
 }
 
