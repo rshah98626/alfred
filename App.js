@@ -5,11 +5,12 @@ import { NavigationContainer } from '@react-navigation/native'
 import ProtectedRoutes from './src/navigation/ProtectedRoutes'
 import UnprotectedRoutes from './src/navigation/UnprotectedRoutes'
 import StartAppSplash from './src/scenes/StartAppSplash'
+import { UserContext, UserProvider } from './src/state/UserContext'
 
 const App = ({ isInit }) => {
-  const isAuthenticated = useSelector((state) => state.login.isAuthenticated)
-  const stillLoading = useSelector((state) => state.login.stillLoading)
-  const errorMessage = useSelector((state) => state.login.errorMessage)
+  const { isAuthenticated, stillLoading, errorMessage } = React.useContext(
+    UserContext
+  )
 
   const [showSplash, setShowSplash] = useState(isInit)
 
@@ -36,11 +37,11 @@ const App = ({ isInit }) => {
 const Root = () => {
   const [isInit, setIsInit] = useState(true)
   return (
-    <Provider store={store}>
-      {/*<PersistGate loading={null} persistor={persistor}>*/}
+    // <Provider store={store}>
+    <UserProvider>
       <App isInit={isInit} />
-      {/*</PersistGate>*/}
-    </Provider>
+    </UserProvider>
+    // </Provider>
   )
 }
 

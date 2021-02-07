@@ -2,19 +2,37 @@ import { StatusBar } from 'expo-status-bar'
 import React, { useState } from 'react'
 import { StyleSheet, View } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
-import BasicButton from '../commonComponents/LoginButton'
+import BasicButton from '../commonComponents/BasicButton'
 import TextboxInput from '../commonComponents/TextboxInput'
+import { UserServices } from '../services'
 import { actionCreators } from '../state/actions'
+import { UserContext } from '../state/UserContext'
 
 const LoginView = () => {
+  const {
+    loginSuccess,
+    loginLoading,
+    loginFailure,
+    stillLoading,
+  } = React.useContext(UserContext)
+
   const [usernameText, setUsernameText] = useState('')
   const [passwordText, setPasswordText] = useState('')
-  const dispatch = useDispatch()
-  const loginButtonCallback = () => {
-    console.log('Login button pressed')
-    dispatch(actionCreators.loginAction(usernameText, passwordText))
-  }
-  const stillLoading = useSelector((state) => state.login.stillLoading)
+  const [isButtonPressed, setIsButtonPressed] = useState(false)
+
+  React.useEffect(() => {
+    let isSubscribed = true
+
+    if (isButtonPressed) {
+      console.log('Login button pressed')
+      loginLoading()
+      UserServices.login(usernameText, passwordText)
+        .then(() => (isSubscribed ? loginSuccess() : null))
+        .catch((err) => (isSubscribed ? loginFailure(err.message) : null))
+    }
+
+    return () => (isSubscribed = false)
+  }, [isButtonPressed])
 
   return (
     <View style={styles.container}>
@@ -29,7 +47,9 @@ const LoginView = () => {
         onChangeCallback={setPasswordText}
       />
       <BasicButton
-        onPressCallback={loginButtonCallback}
+        onPressCallback={() => {
+          setIsButtonPressed(true)
+        }}
         title="Login"
         isLoading={stillLoading}
       />
