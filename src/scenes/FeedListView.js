@@ -9,7 +9,9 @@ const FeedListView = ({ navigation }) => {
     errorMessage: null,
   })
 
+  // make network call to retreive feed
   useEffect(() => {
+    // use var to cancel component update if component is unmounted
     let isSubscribed = true
 
     DataServices.getFeed()
@@ -32,6 +34,7 @@ const FeedListView = ({ navigation }) => {
           : null
       )
 
+    // cleanup function
     return () => (isSubscribed = false)
   }, [])
 

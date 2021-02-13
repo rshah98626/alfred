@@ -13,6 +13,7 @@ const initialState = {
 const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(loginReducer, initialState)
 
+  // create accessible actions that can be accessed from any component
   const contextValues = {
     isAuthenticated: state.isAuthenticated,
     stillLoading: state.stillLoading,
@@ -28,6 +29,7 @@ const UserProvider = ({ children }) => {
     },
   }
 
+  // embed children under Provider so can access context values
   return (
     <UserContext.Provider value={contextValues}>
       {children}

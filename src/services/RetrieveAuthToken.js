@@ -4,7 +4,7 @@ const retrieveAuthToken = async () => {
   try {
     const jsonValue = await AsyncStorage.getItem(process.env.AUTH_TOKEN)
     if (!jsonValue)
-      throw new Error('Retrievung auth token from async storage returned null')
+      throw new Error('Retrieving auth token from async storage returned null')
     return jsonValue
   } catch (e) {
     console.error(e.message)

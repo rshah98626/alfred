@@ -34,6 +34,7 @@ const App = ({ isInit }) => {
 
 const Root = () => {
   const [isInit] = useState(true)
+  // Add in Providers here
   return (
     <UserProvider>
       <App isInit={isInit} />
