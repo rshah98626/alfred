@@ -5,7 +5,7 @@ const Post = ({ postData, navigation }) => {
   const dateString = new Date(postData.created_at).toLocaleString()
   const onPressHandler = () => {
     if (postData.articles.length > 0) {
-      navigation.navigate('Article', { postId: postData.id })
+      navigation.navigate('Article', { currentPost: postData })
     }
   }
 

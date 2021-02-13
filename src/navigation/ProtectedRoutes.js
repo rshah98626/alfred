@@ -2,7 +2,7 @@ import React from 'react'
 import { createStackNavigator } from '@react-navigation/stack'
 import SettingsView from '../scenes/SettingsView'
 import FundsListView from '../scenes/FundsListView'
-import FeedListView from '../commonComponents/FeedListView'
+import FeedListView from '../scenes/FeedListView'
 import ArticleDetailView from '../scenes/ArticleDetailView'
 
 const Stack = createStackNavigator()
