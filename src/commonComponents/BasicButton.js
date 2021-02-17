@@ -1,7 +1,7 @@
 import React from 'react'
 import { ActivityIndicator, Button } from 'react-native'
 
-const BasicButton = ({ onPressCallback, title, isLoading }) => {
+const BasicButton = ({ onPressCallback, title, isLoading = false }) => {
   if (isLoading) {
     return <ActivityIndicator color="#FFF" size="large" />
   } else {

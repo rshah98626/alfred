@@ -1,8 +1,14 @@
 import React, { useState } from 'react'
 import { TextInput, StyleSheet } from 'react-native'
 
-const TextboxInput = ({ placeholder, isSecure, onChangeCallback }) => {
-  const [text, setText] = useState('')
+const TextboxInput = ({
+  placeholder,
+  isSecure = false,
+  onChangeCallback,
+  keyboardType = 'default',
+  defaultValue = '',
+}) => {
+  const [text, setText] = useState(defaultValue)
   const onChange = (text) => {
     setText(text)
     onChangeCallback(text)
@@ -11,6 +17,7 @@ const TextboxInput = ({ placeholder, isSecure, onChangeCallback }) => {
   return (
     <TextInput
       autoCapitalize="none"
+      keyboardType={keyboardType}
       style={styles.textBox}
       placeholder={placeholder}
       placeholderTextColor="white"
