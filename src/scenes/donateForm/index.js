@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import { useForm } from 'react-hook-form'
 import BasicButton from '../../commonComponents/BasicButton'
 import AmountField from './components/AmountField'
-import CausesField from './components/CausesField'
+import CausesField from './components/causesField'
 
 const DonateFormView = () => {
   const { handleSubmit, control } = useForm()
