@@ -12,7 +12,12 @@ const CauseLabel = ({ id, label, onPressCallback }) => {
 
   return (
     <View>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
+      <TouchableOpacity
+        style={[
+          styles.button,
+          isTapped ? styles.selectedButton : styles.unSelectedButton,
+        ]}
+        onPress={onPress}>
         <Text style={styles.text}>{label}</Text>
       </TouchableOpacity>
     </View>
@@ -21,12 +26,18 @@ const CauseLabel = ({ id, label, onPressCallback }) => {
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#212529',
     display: 'flex',
     alignItems: 'center',
     padding: 5,
     margin: 5,
   },
+  selectedButton: {
+    backgroundColor: 'red',
+  },
+  unSelectedButton: {
+    backgroundColor: '#212529',
+  },
+
   text: {
     color: '#fff',
   },
