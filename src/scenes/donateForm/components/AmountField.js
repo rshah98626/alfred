@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { Text } from 'react-native'
 import BasicButton from '../../../commonComponents/BasicButton'
 
-const AmountField = ({ store, updateStore }) => {
+const AmountField = ({ store, updateStore, nextField }) => {
   const { handleSubmit, control } = useForm()
 
   const parseAmount = (stringNumber) => {
@@ -13,8 +13,8 @@ const AmountField = ({ store, updateStore }) => {
   }
 
   const onSubmit = (data) => {
-    //updateStore({ ...store, ...data })
     updateStore({ ...store, amount: data.amount })
+    nextField()
   }
 
   return (
@@ -31,6 +31,7 @@ const AmountField = ({ store, updateStore }) => {
             }
             placeholder={'Amount'}
             keyboardType={'number-pad'}
+            defaultValue={store.amount !== 0 ? store.amount.toString() : ''}
           />
         )}
       />

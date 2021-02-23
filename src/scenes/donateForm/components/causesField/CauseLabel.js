@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 
-const CauseLabel = ({ id, label, onPressCallback }) => {
-  const [isTapped, setTapped] = useState(false)
+const CauseLabel = ({ id, label, onPressCallback, isSelected }) => {
+  const [isTapped, setTapped] = useState(isSelected)
 
   const onPress = () => {
     let notIsTapped = !isTapped

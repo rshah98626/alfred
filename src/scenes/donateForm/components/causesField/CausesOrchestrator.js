@@ -12,12 +12,13 @@ const CausesOrchestrator = ({ onChange, initialState }) => {
     onChange(newState)
   }
 
-  return initialState.map(({ id, cause }) => {
+  return initialState.map(({ id, cause, selected }) => {
     return (
       <CauseLabel
         key={id}
         id={id}
         label={cause}
+        isSelected={selected}
         onPressCallback={causePressed}
       />
     )

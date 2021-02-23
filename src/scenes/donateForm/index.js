@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import { useForm } from 'react-hook-form'
 import BasicButton from '../../commonComponents/BasicButton'
 import AmountField from './components/AmountField'
@@ -35,14 +35,19 @@ const DonateFormView = () => {
       previousField={decrementStep}
       nextField={incrementStep}
     />,
+    <FinalField onPress={onSubmit} back={decrementStep} />,
   ]
 
+  return <View style={styles.container}>{formPages[step]}</View>
+}
+
+const FinalField = ({ onPress, back }) => {
   return (
-    <View style={styles.container}>
-      <AmountField store={store} updateStore={setStore} />
-      <CausesField store={store} updateStore={setStore} />
-      <BasicButton onPressCallback={onSubmit} title={'Submit'} />
-    </View>
+    <>
+      <BasicButton onPressCallback={back} title={'Go Back'} />
+      <Text>FINAL FIELD</Text>
+      <BasicButton onPressCallback={onPress} title={'Log Data'} />
+    </>
   )
 }
 

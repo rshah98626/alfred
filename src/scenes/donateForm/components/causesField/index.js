@@ -9,10 +9,6 @@ const CausesField = ({ store, updateStore, previousField, nextField }) => {
 
   const onSubmit = (data) => {
     updateStore({ ...store, causes: data.causes })
-  }
-
-  const nextButtonOnPress = () => {
-    handleSubmit(onSubmit)
     nextField()
   }
 
