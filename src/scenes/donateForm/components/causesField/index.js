@@ -1,27 +1,36 @@
 import React from 'react'
-import { Controller } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { View, Text } from 'react-native'
 import CausesOrchestrator from './CausesOrchestrator'
+import BasicButton from '../../../../commonComponents/BasicButton'
 
-const CausesField = ({ control, causes }) => {
-  const initialCausesState = causes.map((val) => {
-    return { ...val, selected: false }
-  })
+const CausesField = ({ store, updateStore, previousField, nextField }) => {
+  const { handleSubmit, control } = useForm()
+
+  const onSubmit = (data) => {
+    updateStore({ ...store, causes: data.causes })
+  }
+
+  const nextButtonOnPress = () => {
+    handleSubmit(onSubmit)
+    nextField()
+  }
 
   return (
     <View>
+      <BasicButton onPressCallback={previousField} title={'Previous Field'} />
       <Text>What issues do you care about?</Text>
       <Controller
         name="causes"
-        defaultValue={initialCausesState}
+        defaultValue={store.causes}
         control={control}
         render={({ onChange }) => (
-          <CausesOrchestrator
-            causes={causes}
-            onChange={onChange}
-            initialState={initialCausesState}
-          />
+          <CausesOrchestrator onChange={onChange} initialState={store.causes} />
         )}
+      />
+      <BasicButton
+        onPressCallback={handleSubmit(onSubmit)}
+        title={'Set Causes'}
       />
     </View>
   )

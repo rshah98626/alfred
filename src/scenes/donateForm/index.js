@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { useForm } from 'react-hook-form'
 import BasicButton from '../../commonComponents/BasicButton'
@@ -6,17 +6,42 @@ import AmountField from './components/AmountField'
 import CausesField from './components/causesField'
 
 const DonateFormView = () => {
-  const { handleSubmit, control } = useForm()
+  const [step, setStep] = useState(0)
+  const incrementStep = () => setStep(step + 1)
+  const decrementStep = () => setStep(step - 1)
 
-  const onSubmit = (data) => {
-    console.log(data)
+  const onSubmit = () => {
+    console.log(store)
   }
+
+  const DEFAULT_DONATION_AMOUNT = 0
+  const initialState = {
+    amount: DEFAULT_DONATION_AMOUNT,
+    causes: causes.map((val) => {
+      return { ...val, selected: false }
+    }),
+  }
+  const [store, setStore] = useState(initialState)
+
+  const formPages = [
+    <AmountField
+      store={store}
+      updateStore={setStore}
+      nextField={incrementStep}
+    />,
+    <CausesField
+      store={store}
+      updateStore={setStore}
+      previousField={decrementStep}
+      nextField={incrementStep}
+    />,
+  ]
 
   return (
     <View style={styles.container}>
-      <AmountField control={control} />
-      <CausesField control={control} causes={causes} />
-      <BasicButton onPressCallback={handleSubmit(onSubmit)} title={'Submit'} />
+      <AmountField store={store} updateStore={setStore} />
+      <CausesField store={store} updateStore={setStore} />
+      <BasicButton onPressCallback={onSubmit} title={'Submit'} />
     </View>
   )
 }

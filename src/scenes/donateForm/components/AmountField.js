@@ -1,32 +1,42 @@
 import React from 'react'
 import TextboxInput from '../../../commonComponents/TextboxInput'
-import { Controller } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { Text } from 'react-native'
+import BasicButton from '../../../commonComponents/BasicButton'
 
-const AmountField = ({ control }) => {
-  const DEFAULT_DONATION_AMOUNT = 0
+const AmountField = ({ store, updateStore }) => {
+  const { handleSubmit, control } = useForm()
 
-  const onChangeCallback = (stringNumber, onChange) => {
+  const parseAmount = (stringNumber) => {
     let val = parseInt(stringNumber)
-    onChange(isNaN(val) ? DEFAULT_DONATION_AMOUNT : val)
+    return isNaN(val) ? 0 : val
+  }
+
+  const onSubmit = (data) => {
+    //updateStore({ ...store, ...data })
+    updateStore({ ...store, amount: data.amount })
   }
 
   return (
     <>
       <Text>How much do you want to donate today?</Text>
       <Controller
-        defaultValue={DEFAULT_DONATION_AMOUNT}
+        defaultValue={store.amount}
         name="amount"
         control={control}
         render={({ onChange }) => (
           <TextboxInput
             onChangeCallback={(stringNumber) =>
-              onChangeCallback(stringNumber, onChange)
+              onChange(parseAmount(stringNumber))
             }
             placeholder={'Amount'}
             keyboardType={'number-pad'}
           />
         )}
+      />
+      <BasicButton
+        onPressCallback={handleSubmit(onSubmit)}
+        title={'Set Amount'}
       />
     </>
   )

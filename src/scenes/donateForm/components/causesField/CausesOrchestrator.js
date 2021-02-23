@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import CauseLabel from './CauseLabel'
 
-const CausesOrchestrator = ({ causes, onChange, initialState }) => {
+const CausesOrchestrator = ({ onChange, initialState }) => {
   const [state, setState] = useState(initialState)
 
   const causePressed = (id, isSelected) => {
@@ -12,12 +12,12 @@ const CausesOrchestrator = ({ causes, onChange, initialState }) => {
     onChange(newState)
   }
 
-  return causes.map((val) => {
+  return initialState.map(({ id, cause }) => {
     return (
       <CauseLabel
-        key={val.id}
-        id={val.id}
-        label={val.cause}
+        key={id}
+        id={id}
+        label={cause}
         onPressCallback={causePressed}
       />
     )
