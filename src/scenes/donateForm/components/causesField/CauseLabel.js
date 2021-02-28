@@ -37,7 +37,6 @@ const styles = StyleSheet.create({
   unSelectedButton: {
     backgroundColor: '#212529',
   },
-
   text: {
     color: '#fff',
   },

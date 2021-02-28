@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { useForm } from 'react-hook-form'
-import BasicButton from '../../commonComponents/BasicButton'
 import AmountField from './components/AmountField'
 import CausesField from './components/causesField'
+import AllocationField from './components/AllocationField'
 
 const DonateFormView = () => {
   const [step, setStep] = useState(0)
@@ -18,7 +18,7 @@ const DonateFormView = () => {
   const initialState = {
     amount: DEFAULT_DONATION_AMOUNT,
     causes: causes.map((val) => {
-      return { ...val, selected: false }
+      return { ...val, selected: false, allocationAmount: 0 }
     }),
   }
   const [store, setStore] = useState(initialState)
@@ -35,20 +35,15 @@ const DonateFormView = () => {
       previousField={decrementStep}
       nextField={incrementStep}
     />,
-    <FinalField onPress={onSubmit} back={decrementStep} />,
+    <AllocationField
+      store={store}
+      updateStore={setStore}
+      nextField={onSubmit}
+      previousField={decrementStep}
+    />,
   ]
 
   return <View style={styles.container}>{formPages[step]}</View>
-}
-
-const FinalField = ({ onPress, back }) => {
-  return (
-    <>
-      <BasicButton onPressCallback={back} title={'Go Back'} />
-      <Text>FINAL FIELD</Text>
-      <BasicButton onPressCallback={onPress} title={'Log Data'} />
-    </>
-  )
 }
 
 const causes = [

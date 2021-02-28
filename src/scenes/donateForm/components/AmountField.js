@@ -8,7 +8,7 @@ const AmountField = ({ store, updateStore, nextField }) => {
   const { handleSubmit, control } = useForm()
 
   const parseAmount = (stringNumber) => {
-    let val = parseInt(stringNumber)
+    let val = parseFloat(stringNumber)
     return isNaN(val) ? 0 : val
   }
 
