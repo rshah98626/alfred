@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from 'react-native'
 import { useForm } from 'react-hook-form'
 import AmountField from './components/AmountField'
 import CausesField from './components/causesField'
-import AllocationField from './components/AllocationField'
+import AllocationField from './components/allocationField'
 
 const DonateFormView = () => {
   const [step, setStep] = useState(0)

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import BasicButton from '../../../commonComponents/BasicButton'
-import { View, Text } from 'react-native'
+import BasicButton from '../../../../commonComponents/BasicButton'
+import { Text } from 'react-native'
 import Slider from '@react-native-community/slider'
 import { useForm, Controller } from 'react-hook-form'
 
@@ -41,18 +41,21 @@ const AllocationOrchestrator = ({ onChange, storeState, totalAmount }) => {
     Math.round((num + Number.EPSILON) * 100) / 100
 
   const rebalanceMoney = (total, numParties) => {
+    if (isNaN(total) || numParties === 0) return []
+
     let roundedValue = roundToNearestHundredth(total / numParties)
     let remainder = roundToNearestHundredth(roundedValue * numParties - total)
     let balancingValue =
       remainder < 0 ? roundedValue + 0.01 : roundedValue - 0.01
     let numBalancing = Math.abs(remainder * 100)
+
     return Array(numParties - numBalancing)
       .fill(roundedValue)
       .concat(Array(numBalancing).fill(balancingValue))
   }
 
   const createInitialState = () => {
-    let selectedCauses = storeState.filter(({ selected }) => selected === true)
+    let selectedCauses = storeState.filter(({ selected }) => selected)
     let amounts = rebalanceMoney(totalAmount, selectedCauses.length)
     return selectedCauses.map(({ id, cause }, idx) => {
       return {
