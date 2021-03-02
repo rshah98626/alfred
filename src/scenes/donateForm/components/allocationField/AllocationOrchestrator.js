@@ -18,16 +18,36 @@ const AllocationOrchestrator = ({ onChange, storeState, totalAmount }) => {
   const [state, setState] = useState(createInitialState())
 
   const sliderValueChanged = (sliderId, newValue) => {
-    // try rebalancing
-    let oldSliderValue = state.find(({ id }) => id === sliderId)
-      .allocationAmount
-    var otherValues = rebalanceMoney(
-      oldSliderValue - newValue,
-      state.length - 1
+    let numOtherSliders = state.length - 1
+
+    // calculate maximum value slider can change by
+    let sliderChangeUpperBound = roundToNearestHundredth(
+      (Math.min(
+        ...state
+          .filter(({ id }) => id !== sliderId)
+          .map((t) => t.allocationAmount)
+      ) -
+        0.01) *
+        numOtherSliders
     )
 
-    let newState = state.map((cause) => {
-      return {
+    // cap new slider value at upper bound
+    let oldSliderValue = state.find(({ id }) => id === sliderId)
+      .allocationAmount
+    let sliderChangeValue =
+      oldSliderValue + sliderChangeUpperBound < newValue
+        ? oldSliderValue + sliderChangeUpperBound
+        : newValue
+
+    // rebalance to calculate other slider values
+    let otherValues = rebalanceMoney(
+      oldSliderValue - sliderChangeValue,
+      numOtherSliders
+    )
+
+    // assign other slider values
+    setState(
+      state.map((cause) => ({
         ...cause,
         allocationAmount:
           cause.id === sliderId
@@ -35,10 +55,8 @@ const AllocationOrchestrator = ({ onChange, storeState, totalAmount }) => {
             : roundToNearestHundredth(
                 cause.allocationAmount + otherValues.pop()
               ),
-      }
-    })
-
-    setState(newState)
+      }))
+    )
   }
 
   return state.map(({ id, cause, allocationAmount }) => {
@@ -48,7 +66,7 @@ const AllocationOrchestrator = ({ onChange, storeState, totalAmount }) => {
         id={id}
         causeLabel={cause}
         value={allocationAmount}
-        maxValue={totalAmount}
+        maxValue={totalAmount - (state.length - 1) * 0.01}
         onChange={sliderValueChanged}
       />
     )

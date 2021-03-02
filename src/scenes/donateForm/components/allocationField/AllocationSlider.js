@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Slider from '@react-native-community/slider'
 import { Text } from 'react-native'
 import { roundToNearestHundredth } from './helpers'
@@ -11,7 +11,7 @@ const AllocationSlider = ({ maxValue, value, causeLabel, onChange, id }) => {
       <Slider
         style={{ width: 200 }}
         maximumValue={maxValue}
-        minimumValue={0}
+        minimumValue={0.01}
         value={value}
         onValueChange={slidingChanged}
         step={0.01}

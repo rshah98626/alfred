@@ -17,12 +17,12 @@ export const roundToNearestHundredth = (num) =>
 export const rebalanceMoney = (total, numParties) => {
   if (isNaN(total) || numParties === 0) return []
 
-  let roundedValue = roundToNearestHundredth(total / numParties)
-  let remainder = roundToNearestHundredth(roundedValue * numParties - total)
-  let balancingValue = remainder < 0 ? roundedValue + 0.01 : roundedValue - 0.01
-  let numBalancing = Math.abs(remainder * 100)
+  let units = total * 100
+  let fraction = Math.floor(units / numParties)
+  let remainder = Math.round(Math.abs(units) % numParties)
 
-  return Array(numParties - numBalancing)
-    .fill(roundedValue)
-    .concat(Array(numBalancing).fill(balancingValue))
+  return Array(numParties - remainder)
+    .fill(fraction)
+    .concat(Array(remainder).fill(fraction + Math.sign(units)))
+    .map((v) => v / 100)
 }
